@@ -76,4 +76,3 @@ if __name__ == '__main__':
 	if (not graphColoring(graph, m, 0, color)):
 		print ("Solution does not exist")
 
-# This code is contributed by mohit kumar 29
