@@ -1,54 +1,28 @@
-from queue import PriorityQueue
-v = 14
-graph = [[] for i in range(v)]
+graph = {
+  '5' : ['3','7'],
+  '3' : ['2', '4'],
+  '7' : ['8'],
+  '2' : [],
+  '4' : ['8'],
+  '8' : []
+}
 
-# Function For Implementing Best First Search
-# Gives output path having lowest cost
+visited = [] # List for visited nodes.
+queue = []     #Initialize a queue
 
+def bfs(visited, graph, node): #function for BFS
+  visited.append(node)
+  queue.append(node)
 
-def best_first_search(source, target, n):
-	visited = [False] * n
-	visited = True
-	pq = PriorityQueue()
-	pq.put((0, source))
-	while pq.empty() == False:
-		u = pq.get()[1]
-		# Displaying the path having lowest cost
-		print(u, end=" ")
-		if u == target:
-			break
+  while queue:          # Creating loop to visit each node
+    m = queue.pop(0) 
+    print (m, end = " ") 
 
-		for v, c in graph[u]:
-			if visited[v] == False:
-				visited[v] = True
-				pq.put((c, v))
-	print()
+    for neighbour in graph[m]:
+      if neighbour not in visited:
+        visited.append(neighbour)
+        queue.append(neighbour)
 
-# Function for adding edges to graph
-
-
-def addedge(x, y, cost):
-	graph[x].append((y, cost))
-	graph[y].append((x, cost))
-
-
-# The nodes shown in above example(by alphabets) are
-# implemented using integers addedge(x,y,cost);
-addedge(0, 1, 3)
-addedge(0, 2, 6)
-addedge(0, 3, 5)
-addedge(1, 4, 9)
-addedge(1, 5, 8)
-addedge(2, 6, 12)
-addedge(2, 7, 14)
-addedge(3, 8, 7)
-addedge(8, 9, 5)
-addedge(8, 10, 6)
-addedge(9, 11, 1)
-addedge(9, 12, 10)
-addedge(9, 13, 2)
-
-source = 0
-target = 9
-best_first_search(source, target, v)
-
+# Driver Code
+print("Following is the Breadth-First Search")
+bfs(visited, graph, '5')    # function calling
